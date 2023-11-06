@@ -19,12 +19,10 @@ cover:
     relative: false
 ---
 
+<p style="font-size: 50px;"> </p>
 
-
-<p style="font-size: 25px;">关于我</p>
-
-|           |                    |
-| --------- | ------------------ |
-| 英文名:   | Ian Chen              |
-| 职业:     | 程序员             |
-| 运动:     | 跑步、乒乓球、爬山 |
+- Name: Ian Chen
+- Profession: AI Engineer
+- Hobby:
+  - Swim
+  - Billiards

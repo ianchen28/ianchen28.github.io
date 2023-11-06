@@ -49,7 +49,7 @@ menu:
       weight: 15
     - identifier: archives
       name: ⏱️ Archives
-      url: archives
+      url: archives/
       weight: 20
     - identifier: about
       name: 🙋🏻‍♂️ About
