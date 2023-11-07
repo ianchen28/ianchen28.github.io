@@ -1,7 +1,7 @@
 ---
 layout: post
 title: TorchCraftAI 代码阅读
-updated: 2019-02-15 15:33
+date: 2019-02-15T15:33:00+08:00
 math: true
 categories: [技术]
 tags: [游戏, AI, RL, 星际, 代码]

@@ -55,10 +55,10 @@ menu:
       name: 🙋🏻‍♂️ About
       url: about
       weight: 50
-    - identifier: links
-      name: 🤝 Links
-      url: links
-      weight: 60
+    # - identifier: links
+    #   name: 🤝 Links
+    #   url: links
+    #   weight: 60
 
 outputs:
   home:

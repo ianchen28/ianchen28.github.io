@@ -1,7 +1,7 @@
 ---
 layout: post
 title: TorchCraftAI 架构和实验
-updated: 2019-01-04 18:04
+date: 2019-01-04T18:04:00+08:00
 math: true
 categories: [技术]
 tags: [游戏, AI, RL, 星际]

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Dota2BotStepByStep 代码阅读
-updated: 2019-04-10 21:24
+date: 2019-04-10T21:24:00+08:00
 math: true
 categories: [技术]
 tags: [游戏, AI, RL, 星际, 代码]
