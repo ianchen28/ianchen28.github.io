@@ -24,7 +24,6 @@ math: true
 该项目于2018年11月22日开源发布
 
 ---
----
 
 ## 系统架构
 
@@ -71,7 +70,6 @@ TorchCraft整合了TorchCraft Client端的C++库并抽象了game loop和game sta
 
 ![Self-play setup](https://torchcraft.github.io/TorchCraftAI/docs/assets/system.png)
 
----
 ---
 
 ## 部署过程及遇坑
@@ -205,7 +203,7 @@ Cherrypi依赖gflags，glog和ZeroMQ，分别编译
 打开build/CherryPi.sln
 
 右键cherrypi->项目->属性->链接器->命令行->附加选项中加   /force:multiple
-![solusion](/img/LNK1169.png)
+![solusion](img/LNK1169.png)
 
 至此编译就通过了，生成了目标exe文件在TorchCraftAI/Release中
 
@@ -370,7 +368,6 @@ const double kMapDiagonal =
 
 最终编译通过
 
----
 ---
 
 ## TODO

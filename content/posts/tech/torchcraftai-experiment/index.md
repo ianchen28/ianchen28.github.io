@@ -472,7 +472,7 @@ micro:
 
 命令行启动cherrypi.exe的agent，然后用Chaoslauncher.exe勾选`BWAPI 4.2.0 Injector [RELEASE]`选项，点击Start启动游戏
 
-![ChaosLauncher](/posts/img/chaoslauncher-config.png)
+![ChaosLauncher](img/chaoslauncher-config.png)
 
 （注意W-MODE 1.02插件可以使游戏以窗口形式运行，但该插件会被McAfee误杀，需要添加例外）
 

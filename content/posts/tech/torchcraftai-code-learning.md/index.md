@@ -14,14 +14,14 @@ math: true
 
 主要逻辑流程如下图：
 
-![Model Update](/posts/img/TorchCraftAI/rl-model.png)
+<center>{{< figure src="img/rl-model.png" width="50%" title="" >}}</center>
 
 * trainer loop中每回合使用replay buffer中的episode样本policy gradient方式更新当前模型
 * 交互thread loop中每个线程用当前最新版本模型进行游戏，记录episode和reward
 
 代码流程图：
 
-![MainProcess](/posts/img/TorchCraftAI/main.png)
+![MainProcess](img/main.png)
 
 * 代码流程中绿色框图对应模型更新部分，棕色框图对应游戏交互和replay buffer部分，紫色框图对应evaluation部分
 * player->step()中调用模型
@@ -36,7 +36,7 @@ math: true
 
 Player继承自BasePlayer类，继承关系如下：
 
-![player](/posts/img/TorchCraftAI/player.png)
+<center>{{< figure src="img/player.png" width="30%" title="" >}}</center>
 
 * Player包含多个Module，每个Module负责一种操作
 * 由step()方法与游戏环境交互通信
@@ -60,7 +60,7 @@ Player继承自BasePlayer类，继承关系如下：
 
 继承关系如下：
 
-![module](/posts/img/TorchCraftAI/module.png)
+![module](img/module.png)
 
 ### Trainer类
 
@@ -74,7 +74,7 @@ Player继承自BasePlayer类，继承关系如下：
 
 继承关系如下图：
 
-![trainer](/posts/img/TorchCraftAI/trainer.png)
+![trainer](img/trainer.png)
 
 ### Model类
 
@@ -82,7 +82,7 @@ Player继承自BasePlayer类，继承关系如下：
 
 Model类继承关系如下图：
 
-![model](/posts/img/TorchCraftAI/model.png)
+![model](img/model.png)
 
 * 同时还维护输入特征数据的提取模块，包括
   * 不随游戏进程改变的地图或玩家相关特征StaticData
@@ -91,17 +91,17 @@ Model类继承关系如下图：
 
 特征类继承关系图如下：
 
-![buildingPlacerFeatureClass](/posts/img/TorchCraftAI/bpfeatureclass.png)
+<center>{{< figure src="img/bpfeatureclass.png" width="60%" title="" >}}</center>
 
 特征生成逻辑框图如下：
 
-![buildingPlacerFeature](/posts/img/TorchCraftAI/bpfeature.png)
+![buildingPlacerFeature](img/bpfeature.png)
 
 * 维护一个DNN模型，并提供forward(Variant)接口，通过grad更新参数
 
 DNN模型逻辑框图如下：
 
-![buildingPlacerModel](/posts/img/TorchCraftAI/bpmodel.png)
+![buildingPlacerModel](img/bpmodel.png)
 
 ### 监督学习策略
 
@@ -134,22 +134,31 @@ repeat until convergence {
 样本集被送入与强化学习一样的CNN模型中，输出tilePosition的概率分布
 
 $$
-\mathcal{o} = \mathcal{M_\theta}(x) = \mathcal{P}(tilePosition) = \mathcal{F_{CNN}}(stateFeature)
+\begin{align}
+    \mathcal{o} &= \mathcal{M_\theta}(x) \newline
+    &= \mathcal{P}(tilePosition) \newline
+    &= \mathcal{F_{CNN}}(stateFeature)
+\end{align}
 $$
 
 损失函数为NLLLoss(Negative Log Likelihood Loss)。对于mini batch（N）：
 
 $$
-\mathcal{l} = \mathcal{Loss}(y, o) = \frac{1}{N}\cdot\sum_{n = 1}^{N}{o_{n,y_n}}
+\begin{align}
+    \mathcal{l} &= \mathcal{Loss}(y, o) \newline
+    &= \frac{1}{N}\cdot\sum_{n = 1}^{N}{o_{n,y_n}}
+\end{align}
 $$
 
-其中$o_{n,y_n}=o_n[i]\,\text{where}\,y_n[i] = 1$
+其中$o_{n,y_n}=o_n[i]\ \text{where}\ y_n[i] = 1$
 
 更新部分：
 
 $$
-v_t = \beta v_{t-1} + (1 - \beta)\nabla\\
-\theta\gets\theta - \alpha v_t
+\begin{align}
+    v_t &= \beta v_{t-1} + (1 - \beta)\nabla  \newline
+    \theta &= \theta - \alpha v_t
+\end{align}
 $$
 
 ## Micro Management流程
@@ -161,7 +170,7 @@ $$
 ### Evolution Strategies
 
 模型更新方法如下：
-![Evolution Strategies](/posts/img/TorchCraftAI/es-model.png)
+<center>{{< figure src="img/es-model.png" width="60%" title="" >}}</center>
 
 * 其中红框范围内是model history记录的历史模型
 * 在每一次update过程中每一个空闲线程会对当前模型（current model/latest model）加入参数扰动生成新的衍生模型（perturbed model）并利用衍生模型进行游戏并记录replay
@@ -175,23 +184,29 @@ $$
 >* 真实衍生模型的参数采样$x_{o(riginal)}$分布为
 >
 > $$
-> x_o \sim \mathcal{N}(Params_o, \sigma) \\
-> \mathcal{P}(x_o)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x_o - Params_o)^2}{2\sigma^2}}
+\begin{align}
+    x_o &\sim \mathcal{N}(\mu_o, \sigma) \newline
+    \mathcal{P}(x_o) &= \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x_o - \mu_o)^2}{2\sigma^2}}
+\end{align}
 > $$
 >
 >* 需要模拟的衍生模型的参数$x_{c(urrent)}$采样分布为
 >
 > $$
-> x_c \sim \mathcal{N}(Params_c, \sigma) \\
-> \mathcal{P}(x_c)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x_c - Params_c)^2}{2\sigma^2}}
-> $$
+\begin{align}
+    x_c &\sim \mathcal{N}(\mu_c, \sigma) \newline
+    \mathcal{P}(x_c) &= \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x_c - \mu_c)^2}{2\sigma^2}}
+\end{align}
+$$
 >
->* 重要性采样权重$iw$(importance sampling weight)为
+>* 重要性采样权重 $iw$ (importance sampling weight)为
 >
 > $$
-> iw = \frac{\mathcal{P}(Params_p|Params_c, \sigma)}{\mathcal{P}(Params_p|Params_o, \sigma)}\\
-> \log(iw) = \frac{1}{2}\cdot\frac{-(Params_p - Params_c)^2 + (Params_p - Params_o)^2}{\sigma^2}
-> $$
+\begin{align}
+    iw &= \frac{\mathcal{P}(\mu_p|\mu_c, \sigma)}{\mathcal{P}(\mu_p|\mu_o, \sigma)} \newline
+    \log(iw) &= \frac{1}{2}\cdot\frac{-(\mu_p - \mu_c)^2 + (\mu_p - \mu_o)^2}{\sigma^2}
+\end{align}
+$$
 
 其中$Params_p$为衍生模型参数
 
@@ -199,11 +214,11 @@ $$
 
 特征提取和building placer差不多，但多了UnitStatFeature部分，生成逻辑如下图：
 
-![MicroManagementFeatureClass](/posts/img/TorchCraftAI/mmfeature.png)
+![MicroManagementFeatureClass](img/mmfeature.png)
 
 ### Model
 
 模型部分输出如下：
 
-![MicroManagementModel1](/posts/img/TorchCraftAI/mmmodel1.png)
-![MicroManagementModel2](/posts/img/TorchCraftAI/mmmodel2.png)
+![MicroManagementModel1](img/mmmodel1.png)
+![MicroManagementModel2](img/mmmodel2.png)
