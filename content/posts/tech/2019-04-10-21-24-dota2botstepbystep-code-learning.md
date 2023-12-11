@@ -5,6 +5,7 @@ date: 2019-04-10T21:24:00+08:00
 math: true
 categories: [技术]
 tags: [游戏, AI, RL, 星际, 代码]
+math: true
 ---
 
 ## Dota2BotStepByStep总结

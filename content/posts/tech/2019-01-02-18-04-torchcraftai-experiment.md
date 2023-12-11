@@ -5,6 +5,7 @@ date: 2019-01-04T18:04:00+08:00
 math: true
 categories: [技术]
 tags: [游戏, AI, RL, 星际]
+math: true
 ---
 
 *本文主要参考（翻译）了TorchCraftAI项目的官方文档[Tutorials](https://torchcraft.github.io/TorchCraftAI/docs/bptut-intro.html)并加入了自己在阅读和实验中的一些坑和理解*
@@ -295,8 +296,8 @@ $$
 
 $$
 R(a_t)=\begin{cases}
-+0.5, &a_t建筑成功开始并最终取得胜利\\
--0.5, &a_t建筑成功开始并最终取得失败\\
++0.5, &a_t建筑成功开始并最终取得胜利\newline
+-0.5, &a_t建筑成功开始并最终取得失败\newline
 0, &其他
 \end{cases}
 $$
@@ -384,8 +385,8 @@ embedding网络决定potential field中包含什么unit，parameter决定威胁�
 
 $$
 F(e, w_1, w_2)=e\times\begin{cases}
-1 &d \leq w_1\\
-\frac{w_2 + w_1 - d}{w_1} & w_1 < d \leq w_1 + w_2\\
+1 &d \leq w_1\newline
+\frac{w_2 + w_1 - d}{w_1} & w_1 < d \leq w_1 + w_2\newline
 0 &d > w_2
 \end{cases}
 $$

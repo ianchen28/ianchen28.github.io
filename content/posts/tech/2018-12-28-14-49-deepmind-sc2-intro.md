@@ -4,6 +4,7 @@ title: DeepMind pysc2 简介和部署记录
 date: 2018-12-28T14:51:00+08:00
 categories: [技术]
 tags: [游戏, AI, RL, 星际]
+math: true
 ---
 
 ## pysc2简介
