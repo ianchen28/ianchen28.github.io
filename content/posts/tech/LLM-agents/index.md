@@ -133,4 +133,19 @@ LLM 的调用成本还是很高，用它来驱动上述 NPC 系统会有两方�
 
 上述所有的生成内容都会落盘到数据库中，这样可以保证玩家离线后，NPC 的行为和对话内容不会发生变化。
 
-To be continued...
+> To be continued...
+
+### 阅读材料
+
+- [Voyager](https://github.com/MineDojo/Voyager)
+  - LLM 驱动的 Mine Craft 行为树
+  - 代替 RL 算法生成行为策略
+- [Generative Agents](https://github.com/joonspk-research/generative_agents)
+  - 斯坦福小镇
+  - 用 LLM 生成对话和日常生活
+- [camel](https://github.com/camel-ai/camel)
+  - 角色扮演对话框架
+  - 支持多角色扩展
+- [chat haruhi](https://github.com/LC1332/Chat-Haruhi-Suzumiya)
+  - 人格模拟对话系统
+  - 精调
