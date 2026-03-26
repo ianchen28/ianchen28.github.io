@@ -1,10 +1,11 @@
 ---
-title: Transformer - LLM 从零开始
+title: "Transformer - LLM 从零开始 (Part 1: Attention)"
 date: 2023-12-07T21:55:17+08:00
-draft: true
+draft: false
 categories: [理论]
-tags: [AI, 实现, PyTorch, LLM]
+tags: [AI, Transformer, Attention, PyTorch, LLM]
 math: mathjax
+description: "从 RNN 的缺陷出发，推导 Attention 机制的出现逻辑，直到 Self-Attention 和 Transformer 的完全体。"
 ---
 
 ## 0. 写在前面
