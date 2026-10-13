@@ -1,0 +1,14 @@
+{{ define "main" }}
+<article class="research-project">
+  <header class="portfolio-hero">
+    {{ partial "breadcrumbs.html" . }}
+    <h1>{{ .Title }}</h1>
+    <span class="portfolio-status">{{ .Params.status_label }}</span>
+    <p class="portfolio-lead">{{ .Description }}</p>
+    <div class="portfolio-actions">
+      <a href="{{ .Params.source_url }}">{{ .Params.source_label }} &rarr;</a>
+    </div>
+  </header>
+  <div class="post-content">{{ partial "anchored_headings.html" .Content }}</div>
+</article>
+{{ end }}

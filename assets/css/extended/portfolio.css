@@ -1,0 +1,422 @@
+body:has(.portfolio-home) .main,
+body:has(.research-project) .main,
+body:has(.portfolio-projects) .main {
+    max-width: 1200px;
+}
+
+.portfolio-home,
+.research-project,
+.portfolio-projects {
+    --portfolio-accent: #245d79;
+    --portfolio-frozen: #7a4f8a;
+    color: var(--primary);
+}
+
+.dark .portfolio-home,
+.dark .research-project,
+.dark .portfolio-projects {
+    --portfolio-accent: #9acbea;
+    --portfolio-frozen: #d6a9e8;
+    --portfolio-diagram-text: #b2b4b8;
+}
+
+.portfolio-hero {
+    padding: 44px 0 24px;
+}
+
+.portfolio-hero h1 {
+    max-width: 940px;
+    font-size: clamp(32px, 4.5vw, 54px);
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+}
+
+.portfolio-eyebrow {
+    font: 600 12px/1.6 monospace;
+    letter-spacing: 0.05em;
+    color: var(--portfolio-accent);
+}
+
+.portfolio-lead {
+    max-width: 860px;
+    font-size: 19px;
+    color: var(--secondary);
+    line-height: 1.75;
+}
+
+.portfolio-lead p {
+    margin: 0 0 20px;
+}
+
+.portfolio-home section {
+    margin: 42px 0;
+    scroll-margin-top: 24px;
+}
+
+.portfolio-identity {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.portfolio-card.portfolio-featured {
+    border-inline-start: 3px solid var(--portfolio-accent);
+}
+
+.portfolio-card.portfolio-featured h3,
+.portfolio-card.portfolio-featured h2 {
+    font-size: 24px;
+}
+
+.portfolio-primary-link {
+    font-weight: 600;
+}
+
+.portfolio-project-grid {
+    display: grid;
+    gap: 24px;
+    margin: 24px 0 48px;
+}
+
+.portfolio-project-intro {
+    max-width: 76ch;
+    color: var(--secondary);
+    line-height: 1.75;
+}
+
+.research-project .post-content > p,
+.research-project .post-content > ul,
+.research-project .post-content > ol {
+    max-width: 76ch;
+}
+
+/* All navigation links stay visible, including on narrow screens. */
+.header #menu {
+    flex-wrap: wrap;
+    white-space: normal;
+    overflow: visible;
+    column-gap: 20px;
+    row-gap: 0;
+}
+
+.header #menu li + li {
+    margin-inline-start: 0;
+}
+
+.header #menu a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    line-height: 1.4;
+    padding: 6px 0;
+}
+
+.header #menu a:focus-visible,
+.header #theme-toggle:focus-visible,
+.header .lang-switch a:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+}
+
+@media (max-width: 1100px) {
+    .header #menu {
+        flex-basis: 100%;
+    }
+}
+
+@media (max-width: 700px) {
+    .header #menu {
+        column-gap: 14px;
+    }
+}
+
+.portfolio-home h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    line-height: 1.35;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.portfolio-interests {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.portfolio-card {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+}
+
+.portfolio-card h3 {
+    font-size: 19px;
+    line-height: 1.5;
+    margin: 8px 0 14px;
+}
+
+.portfolio-card p {
+    color: var(--secondary);
+    line-height: 1.75;
+}
+
+.portfolio-card time {
+    font-size: 13px;
+    color: var(--secondary);
+}
+
+.portfolio-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    margin-top: 22px;
+    font-size: 15px;
+}
+
+.portfolio-actions a, .portfolio-home a {
+    text-underline-offset: 0.2em;
+    text-decoration: underline;
+}
+
+.portfolio-status {
+    display: inline-block;
+    font: 600 12px/1.6 monospace;
+    padding: 5px 10px;
+    border: 1px solid var(--portfolio-accent);
+    color: var(--portfolio-accent);
+    border-radius: 4px;
+    margin-bottom: 18px;
+}
+
+.portfolio-more {
+    margin-top: 18px;
+}
+
+.portfolio-note {
+    color: var(--secondary);
+    font-size: 14px;
+}
+
+.research-project .post-content {
+    margin-top: 30px;
+}
+
+.research-project .post-content > h2 {
+    margin-top: 42px;
+}
+
+.agent-loop {
+    padding: 24px;
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin: 24px 0;
+}
+
+.agent-loop h3 {
+    margin-top: 0;
+}
+
+.agent-loop h4 {
+    font-size: 16px;
+}
+
+.agent-loop-track {
+    position: relative;
+}
+
+.research-project .agent-loop-stages {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 16px;
+    padding: 0;
+    margin: 18px 0 0;
+}
+
+.agent-loop-stages li {
+    position: relative;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--portfolio-accent);
+    padding: 14px 8px;
+    margin: 0;
+    text-align: center;
+}
+
+.agent-loop-stages strong {
+    display: block;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.agent-loop-stages small {
+    display: block;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--portfolio-diagram-text, var(--secondary));
+    margin-top: 8px;
+}
+
+.agent-loop-stages li:not(:last-child)::after {
+    content: "\2192";
+    position: absolute;
+    right: -15px;
+    top: 30px;
+    font-size: 16px;
+    color: var(--portfolio-accent);
+}
+
+.agent-feedback-horizontal {
+    width: 100%;
+    height: 56px;
+    display: block;
+    fill: var(--portfolio-accent);
+}
+
+.feedback-path {
+    fill: none;
+    stroke: var(--portfolio-accent);
+    stroke-width: 2.5;
+    vector-effect: non-scaling-stroke;
+}
+
+.agent-feedback-vertical {
+    display: none;
+    fill: var(--portfolio-accent);
+}
+
+.agent-feedback-caption {
+    text-align: center;
+    font-size: 14px;
+    color: var(--portfolio-accent);
+}
+
+.heldout-evaluation {
+    border: 2px dashed var(--portfolio-frozen);
+    border-left: 5px solid var(--portfolio-frozen);
+    padding: 20px;
+    margin: 26px 0 20px;
+}
+
+.heldout-evaluation h4 {
+    margin: 0 0 14px;
+    color: var(--portfolio-frozen);
+}
+
+.research-project .heldout-stages {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin: 0 0 18px;
+    padding-left: 22px;
+    font-size: 14px;
+}
+
+.heldout-evaluation p {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+.harness-architecture {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin: 24px 0;
+}
+
+.harness-architecture summary {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.harness-architecture li {
+    padding: 10px;
+    background: var(--code-bg);
+    margin: 12px 0;
+}
+
+.harness-architecture strong, .harness-architecture span {
+    display: block;
+}
+
+.harness-architecture span {
+    font-size: 14px;
+    color: var(--portfolio-diagram-text, var(--secondary));
+}
+
+.portfolio-home a:focus-visible, .research-project a:focus-visible, .portfolio-projects a:focus-visible, .harness-architecture summary:focus-visible {
+    outline: 3px solid var(--portfolio-accent);
+    outline-offset: 4px;
+}
+
+@media (max-width: 1100px) {
+    .research-project .agent-loop-stages {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .agent-loop-track {
+        margin-left: 28px;
+    }
+
+    .agent-loop-stages li {
+        padding: 14px;
+        text-align: left;
+    }
+
+    .agent-loop-stages li:not(:last-child)::after {
+        content: "\2193";
+        top: auto;
+        bottom: -24px;
+        right: calc(50% - 6px);
+    }
+
+    .agent-feedback-horizontal {
+        display: none;
+    }
+
+    .agent-feedback-vertical {
+        display: block;
+        position: absolute;
+        left: -28px;
+        top: 0;
+        width: 28px;
+        height: 100%;
+    }
+
+    .agent-feedback-caption {
+        margin-top: 18px;
+        text-align: left;
+    }
+
+    .research-project .heldout-stages {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+@media (max-width: 700px) {
+    .portfolio-grid, .portfolio-interests {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-hero {
+        padding-top: 24px;
+    }
+
+    .portfolio-card, .agent-loop, .heldout-evaluation {
+        padding: 18px;
+    }
+
+    .research-project .heldout-stages {
+        grid-template-columns: 1fr;
+    }
+
+}

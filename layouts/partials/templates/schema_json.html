@@ -55,7 +55,21 @@
   ]
 }
 </script>
-{{- if .IsPage }}
+{{- if and .IsPage (eq .Type "projects") }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": {{ .Title | plainify }},
+  "description": {{ .Description | plainify }},
+  "url": {{ .Permalink }},
+  "inLanguage": {{ .Language.Lang }},
+  {{ if not .PublishDate.IsZero }}"datePublished": {{ .PublishDate }},{{ end }}
+  {{ if not .Lastmod.IsZero }}"dateModified": {{ .Lastmod }},{{ end }}
+  "author": { "@type": "Person", "name": {{ site.Params.author }} }
+}
+</script>
+{{- else if .IsPage }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

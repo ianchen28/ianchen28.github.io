@@ -1,0 +1,28 @@
+{{ $loop := .Page.Params.loop }}
+{{ if not $loop }}{{ errorf "Missing loop content in %s" .Page.File.Path }}{{ end }}
+<section class="agent-loop" aria-labelledby="agent-loop-title">
+  <h3 id="agent-loop-title">{{ $loop.title }}</h3>
+  <h4 id="development-evaluation">{{ $loop.development }}</h4>
+  <div class="agent-loop-track">
+    <ol class="agent-loop-stages">
+      {{ range $loop.stages }}
+      <li><strong>{{ .title }}</strong><small>{{ .description }}</small></li>
+      {{ end }}
+    </ol>
+    <svg class="agent-feedback-horizontal" viewBox="0 0 1000 56" aria-hidden="true" focusable="false">
+      <defs><marker id="feedback-arrow-h" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" /></marker></defs>
+      <path class="feedback-path" d="M 934 4 V 36 H 66 V 4" marker-end="url(#feedback-arrow-h)" />
+    </svg>
+    <svg class="agent-feedback-vertical" viewBox="0 0 36 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <defs><marker id="feedback-arrow-v" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" /></marker></defs>
+      <path class="feedback-path" d="M 34 980 H 8 V 20 H 34" marker-end="url(#feedback-arrow-v)" />
+    </svg>
+  </div>
+  <p class="agent-feedback-caption"><strong>{{ $loop.feedback }}</strong><br>{{ $loop.feedback_description }}</p>
+  <section class="heldout-evaluation" aria-labelledby="heldout-title">
+    <h4 id="heldout-title">{{ $loop.heldout }}</h4>
+    <ol class="heldout-stages">{{ range $loop.heldout_stages }}<li>{{ . }}</li>{{ end }}</ol>
+    <p>{{ $loop.heldout_description }}</p>
+  </section>
+  <p class="portfolio-note">{{ $loop.caveat }}</p>
+</section>

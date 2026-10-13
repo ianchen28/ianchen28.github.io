@@ -1,5 +1,5 @@
 baseURL: https://ianchen28.github.io/
-title: "Ian's Blog"
+title: "Ian Chen | AI Research"
 theme: PaperMod
 
 enableInlineShortcodes: true
@@ -29,33 +29,35 @@ languages:
   en:
     languageName: "English"
     weight: 1
-    title: "Ian's Blog"
+    title: "Ian Chen | AI Research"
     params:
       description: "LLM Agent evaluation, rubric quality, and reward modeling research by Ian Chen."
-      profileMode:
-        enabled: true
-        title: "Hi, I'm Ian"
-        subtitle: "Principal Applied Scientist @ Microsoft<br/>LLM Agent Evaluation & Rubric Quality Research"
-        imageUrl: "img/avatar.jpg"
-        imageWidth: 150
-        imageHeight: 150
-        buttons:
-          - name: Research
-            url: posts/research
-          - name: Tech
-            url: posts/tech
-          - name: Archive
-            url: posts/archive
     menu:
       main:
+        - identifier: home
+          name: Home
+          url: /
+          weight: 1
+        - identifier: research
+          name: Research
+          url: /#research
+          weight: 2
+        - identifier: projects
+          name: Projects
+          url: /projects/
+          weight: 3
+        - identifier: posts
+          name: Writing
+          url: /posts/
+          weight: 4
+        - identifier: about
+          name: About
+          url: /about/
+          weight: 5
         - identifier: search
           name: Search
           url: /search/
-          weight: 1
-        - identifier: posts
-          name: Posts
-          url: /posts/
-          weight: 3
+          weight: 6
         - identifier: tags
           name: Tags
           url: /tags/
@@ -64,41 +66,39 @@ languages:
           name: Archives
           url: /archives/
           weight: 20
-        - identifier: about
-          name: About
-          url: /about/
-          weight: 50
 
   zh:
     languageName: "中文"
     weight: 2
-    title: "Ian 的博客"
+    title: "Ian Chen | AI 研究"
     params:
       description: "LLM Agent 评估、Rubric 质量与奖励建模研究 — Ian Chen"
-      profileMode:
-        enabled: true
-        title: "你好，我是 Ian"
-        subtitle: "微软首席应用科学家<br/>LLM Agent 评估 & Rubric Quality 研究"
-        imageUrl: "img/avatar.jpg"
-        imageWidth: 150
-        imageHeight: 150
-        buttons:
-          - name: 研究
-            url: posts/research
-          - name: 技术
-            url: posts/tech
-          - name: 归档
-            url: posts/archive
     menu:
       main:
+        - identifier: home
+          name: 首页
+          url: /
+          weight: 1
+        - identifier: research
+          name: 研究
+          url: /#research
+          weight: 2
+        - identifier: projects
+          name: 项目
+          url: /projects/
+          weight: 3
+        - identifier: posts
+          name: 写作
+          url: /posts/
+          weight: 4
+        - identifier: about
+          name: 关于
+          url: /about/
+          weight: 5
         - identifier: search
           name: 搜索
           url: /search/
-          weight: 1
-        - identifier: posts
-          name: 文章
-          url: /posts/
-          weight: 3
+          weight: 6
         - identifier: tags
           name: 标签
           url: /tags/
@@ -107,10 +107,6 @@ languages:
           name: 归档
           url: /archives/
           weight: 20
-        - identifier: about
-          name: 关于
-          url: /about/
-          weight: 50
 
 outputs:
   home:
@@ -143,13 +139,11 @@ params:
   socialIcons:
     - name: github
       url: "https://github.com/ianchen28"
-    - name: email
-      url: "mailto:ianchen28@gmail.com"
     - name: RSS
       url: "index.xml"
 
   label:
-    text: "Ian's Blog"
+    text: "Ian Chen"
     icon: "img/avatar.jpg"
     iconHeight: 35
 
