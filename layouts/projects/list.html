@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div class="portfolio-projects">
+  <header class="portfolio-hero">
+    {{ partial "breadcrumbs.html" . }}
+    <h1>{{ .Title }}</h1>
+    <p class="portfolio-lead">{{ .Description }}</p>
+  </header>
+  <div class="portfolio-project-intro">{{ .Content }}</div>
+  <section class="portfolio-project-grid" aria-label="{{ .Title }}">
+    {{ range .RegularPages.ByWeight }}
+      {{ partial "portfolio-project-card.html" (dict "project" . "list" true) }}
+    {{ end }}
+  </section>
+</div>
+{{ end }}

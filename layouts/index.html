@@ -1,0 +1,49 @@
+{{ define "main" }}
+<div class="portfolio-home">
+  <header class="portfolio-hero">
+    <p class="portfolio-identity">{{ .Params.identity }}</p>
+    <p class="portfolio-eyebrow">{{ .Params.eyebrow }}</p>
+    <h1>{{ .Title }}</h1>
+    <div class="portfolio-lead">{{ .Content }}</div>
+  </header>
+  <section id="projects" aria-labelledby="projects-title">
+    <h2 id="projects-title">{{ .Params.projects_heading }}</h2>
+    {{ $project := site.GetPage site.Data.portfolio.featured_project }}
+    {{ if not $project }}{{ errorf "Missing featured project for language %s" .Lang }}{{ end }}
+    {{ partial "portfolio-project-card.html" (dict "project" $project) }}
+    <p class="portfolio-more"><a href="{{ "projects/" | relLangURL }}">{{ .Params.projects_link_label }} &rarr;</a></p>
+  </section>
+  <section id="research" aria-labelledby="research-title">
+    <p class="portfolio-eyebrow">{{ .Params.research_label }}</p>
+    <h2 id="research-title">{{ .Params.research_heading }}</h2>
+    <div class="portfolio-grid portfolio-interests">
+      {{ range .Params.interests }}
+      <article class="portfolio-card"><h3>{{ .title }}</h3><p>{{ .question }}</p></article>
+      {{ end }}
+    </div>
+  </section>
+  <section aria-labelledby="writing-title">
+    <h2 id="writing-title">{{ .Params.writing_heading }}</h2>
+    <div class="portfolio-grid">
+      {{ range site.Data.portfolio.selected_posts }}
+      {{ $post := site.GetPage . }}
+      {{ if not $post }}{{ errorf "Missing selected post %s for language %s" . site.Language.Lang }}{{ end }}
+      {{ $description := index $.Params.writing_descriptions . }}
+      {{ if not $description }}{{ errorf "Missing writing description %s for language %s" . site.Language.Lang }}{{ end }}
+      <article class="portfolio-card portfolio-writing">
+        <time datetime="{{ $post.Date.Format "2006-01-02" }}">{{ $post.Date.Format "2006-01-02" }}</time>
+        <h3><a href="{{ $post.RelPermalink }}">{{ $description.title }}</a></h3>
+        <p>{{ $description.description }}</p>
+        <span class="portfolio-note">{{ $.Params.writing_language_label }}</span>
+      </article>
+      {{ end }}
+    </div>
+    <p class="portfolio-more"><a href="{{ "posts/" | relLangURL }}">{{ .Params.writing_link_label }} &rarr;</a></p>
+  </section>
+  <section aria-labelledby="about-title">
+    <h2 id="about-title">{{ .Params.about_heading }}</h2>
+    <p class="portfolio-lead">{{ .Params.about_summary }}</p>
+    <a href="{{ "about/" | relLangURL }}">{{ .Params.about_link_label }} &rarr;</a>
+  </section>
+</div>
+{{ end }}

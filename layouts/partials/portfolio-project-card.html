@@ -1,0 +1,12 @@
+{{- $project := .project -}}
+{{- $home := site.Home -}}
+{{- $heading := cond (.list | default false) "h2" "h3" -}}
+<article class="portfolio-card portfolio-featured">
+  <span class="portfolio-status">{{ $project.Params.status_label }}</span>
+  {{ printf "<%s>" $heading | safeHTML }}<a href="{{ $project.RelPermalink }}">{{ $project.Title }}</a>{{ printf "</%s>" $heading | safeHTML }}
+  <p>{{ $project.Description }}</p>
+  <div class="portfolio-actions">
+    <a class="portfolio-primary-link" href="{{ $project.RelPermalink }}">{{ $home.Params.project_link_label }} &rarr;</a>
+    {{ with $project.Params.source_url }}<a href="{{ . }}">{{ $home.Params.source_label }}</a>{{ end }}
+  </div>
+</article>

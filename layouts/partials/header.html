@@ -74,7 +74,8 @@
             {{- end }}
             <div class="logo-switches">
                 {{- if (not site.Params.disableThemeToggle) }}
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                {{- $themeLabel := cond (eq .Lang "zh") "切换明暗主题" "Toggle color theme" }}
+                <button id="theme-toggle" accesskey="t" aria-label="{{ $themeLabel }}" title="{{ $themeLabel }} (Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -98,7 +99,9 @@
 
                 {{- $lang := .Lang}}
                 {{- $separator := or $label_text (not site.Params.disableThemeToggle)}}
-                {{- with site.Home.AllTranslations }}
+                {{- $translations := site.Home.AllTranslations }}
+                {{- if .IsTranslated }}{{ $translations = .AllTranslations }}{{ end }}
+                {{- with $translations }}
                 <ul class="lang-switch">
                     {{- if $separator }}<li>|</li>{{ end }}
                     {{- range . -}}

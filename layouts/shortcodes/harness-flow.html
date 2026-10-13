@@ -1,0 +1,6 @@
+{{ $harness := .Page.Params.harness }}
+{{ if not $harness }}{{ errorf "Missing harness content in %s" .Page.File.Path }}{{ end }}
+<details class="harness-architecture">
+  <summary>{{ $harness.title }}</summary>
+  <ol>{{ range $harness.stages }}<li><strong>{{ .title }}</strong><span>{{ .description }}</span></li>{{ end }}</ol>
+</details>
