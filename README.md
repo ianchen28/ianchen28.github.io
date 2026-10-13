@@ -73,14 +73,17 @@ public URL segment. Homepage branding does not rename the blog. Projects are
 searchable but excluded from legacy blog archives and RSS item selection.
 Publications are omitted until real references are available.
 
-The existing Chinese article image-link issue is **not fixed by this MVP**:
-21 relative image references fail in the baseline build. A resource-aware
-render-hook/figure patch is tested separately; do not migrate article content
-or silently merge that repair. Existing article math uses KaTeX CDN resources.
+The Chinese article image-link repair is a separate maintenance commit:
+resource-aware image/figure templates resolve shared page-bundle resources,
+reducing the baseline's 21 missing local references to zero. Article and media
+sources stay in place. Regression checks permit only image `src` repairs in
+article, feed and search-summary output. Existing math uses KaTeX CDN resources.
 
 About pages use a neutral research biography. Professional title, affiliation,
-education, contact details, preferred name and avatar await owner confirmation;
-record these in review materials, not public-page placeholders. Describe Agent
+education and any additional contact details remain omitted pending owner
+confirmation. The existing Ian Chen name, avatar and GitHub contact were
+confirmed for this release; record future changes in review materials, not
+public-page placeholders. Describe Agent
 Improvement Lab as a public research project until its license is confirmed;
 this website does not add or choose a research license. The old title is not
 reused. This website is separate from Agent Improvement Lab's Python
@@ -101,11 +104,12 @@ node tests/portfolio_browser.cjs http://localhost:1313 /tmp/portfolio-browser
 `tests/preserve_legacy.py` compares a production build with the legacy baseline
 and inventories from the workspace audit. It checks source hashes, routes,
 article DOM/anchors, feeds, search and missing local references. Use
-`--image-fix` only for the separate maintenance candidate; that mode allows
-image `src` repairs while preserving the remaining article/feed/search data.
+`--image-fix` for the current release including the maintenance commit; that
+mode allows image `src` repairs while preserving the remaining article/feed/
+search data. Omit it only when checking the pre-maintenance portfolio commit.
 
 ```bash
-python3 tests/preserve_legacy.py SOURCE BASELINE_PUBLIC PUBLIC INVENTORY OUTPUT_JSON
+python3 tests/preserve_legacy.py SOURCE BASELINE_PUBLIC PUBLIC INVENTORY OUTPUT_JSON --image-fix
 ```
 
 Keep generated output outside the source repository. No new browser or Python
