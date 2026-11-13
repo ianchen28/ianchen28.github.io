@@ -6,6 +6,11 @@
     <span class="portfolio-status">{{ .Params.status_label }}</span>
     <p class="portfolio-lead">{{ .Description }}</p>
     <div class="portfolio-actions">
+      {{ with .Params.progress_page }}
+      {{ with site.GetPage . }}
+      <a class="portfolio-primary-link" href="{{ .RelPermalink }}">{{ $.Params.progress_label }} &rarr;</a>
+      {{ end }}
+      {{ end }}
       <a href="{{ .Params.source_url }}">{{ .Params.source_label }} &rarr;</a>
     </div>
   </header>

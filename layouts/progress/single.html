@@ -1,0 +1,39 @@
+{{ define "main" }}
+<article class="research-progress">
+  <header class="portfolio-hero">
+    {{ partial "breadcrumbs.html" . }}
+    <p class="portfolio-eyebrow">{{ .Params.eyebrow }}</p>
+    <h1>{{ .Title }}</h1>
+    <p class="portfolio-lead">{{ .Description }}</p>
+    <p class="progress-dates">{{ .Params.evidence_label }} <time datetime="{{ .Params.evidence_date }}">{{ .Params.evidence_date }}</time> · {{ .Params.updated_label }} <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod.Format "2006-01-02" }}</time></p>
+    <p class="portfolio-status">{{ .Params.status_label }}</p>
+  </header>
+  <section class="progress-snapshot" aria-labelledby="progress-snapshot-title">
+    <h2 id="progress-snapshot-title">{{ .Params.snapshot_heading }}</h2>
+    <div class="progress-highlights">
+      {{ range .Params.snapshot }}
+      <div class="progress-highlight">
+        <h3>{{ .title }}</h3>
+        <p>{{ .text }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </section>
+  <nav class="progress-reading-nav" aria-labelledby="progress-reading-title">
+    <h2 id="progress-reading-title">{{ .Params.reading_heading }}</h2>
+    <ol>
+      {{ range .Params.reading_links }}
+      <li><a href="#{{ .id }}">{{ .label }}</a></li>
+      {{ end }}
+    </ol>
+  </nav>
+  <div class="post-content">{{ partial "anchored_headings.html" .Content }}</div>
+  <footer class="progress-source-note">
+    <h2>{{ .Params.note_heading }}</h2>
+    <p>{{ .Params.note }}</p>
+    {{ with site.GetPage .Params.project_page }}
+    <a href="{{ .RelPermalink }}">{{ $.Params.project_link_label }} &rarr;</a>
+    {{ end }}
+  </footer>
+</article>
+{{ end }}

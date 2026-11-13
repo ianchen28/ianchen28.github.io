@@ -37,6 +37,11 @@ Chinese. Project pages are `/projects/agent-improvement-lab/` and
 `/zh/projects/agent-improvement-lab/`. Serve this Hugo site, not the separate
 research repository. Use `-D` only when intentionally reviewing drafts.
 
+The beginner-friendly development account is `/progress/` or `/zh/progress/`,
+linked from the homepage and project page. It separates the experiment evidence
+date from the page update date and keeps completed work, negative findings and
+future goals explicit.
+
 ## Structure
 
 ```
@@ -44,6 +49,7 @@ content/
 ├── _index.md        # Portfolio homepage (with _index.zh.md)
 ├── about/           # About page (bilingual)
 ├── projects/        # Independent bilingual project bundles
+├── progress/        # Bilingual, manually reviewed development account
 ├── posts/
 │   ├── research/    # LLM/Agent/Rubric research
 │   ├── tech/        # Technical articles
@@ -71,7 +77,8 @@ Keep original post Markdown, dates, tags, attribution, draft flags, bundle
 images and URLs. In particular, `torchcraftai-code-learning.md/` is an existing
 public URL segment. Homepage branding does not rename the blog. Projects are
 searchable but excluded from legacy blog archives and RSS item selection.
-Publications are omitted until real references are available.
+The development-progress page is also searchable and excluded from blog feeds
+and archives. Publications are omitted until real references are available.
 
 The Chinese article image-link repair is a separate maintenance commit:
 resource-aware image/figure templates resolve shared page-bundle resources,
@@ -100,6 +107,10 @@ Playwright module with `PLAYWRIGHT_MODULE` if it is not installed locally:
 ```bash
 node tests/portfolio_browser.cjs http://localhost:1313 /tmp/portfolio-browser
 ```
+
+Use `--progress` to restrict the browser pass to the bilingual home, project
+and development-progress pages, including progress navigation, disclosures,
+language switching and search.
 
 `tests/preserve_legacy.py` compares a production build with the legacy baseline
 and inventories from the workspace audit. It checks source hashes, routes,

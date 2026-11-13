@@ -33,7 +33,7 @@
 {{- $pages = site.RegularPages }}
 {{- end }}
 
-{{- $pages = where $pages "Type" "ne" "projects" }}
+{{- $pages = where $pages "Type" "not in" (slice "projects" "progress") }}
 {{- range $pages.GroupByPublishDate "2006" }}
 {{- if ne .Key "0001" }}
 <div class="archive-year">
