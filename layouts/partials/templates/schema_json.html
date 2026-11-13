@@ -55,7 +55,7 @@
   ]
 }
 </script>
-{{- if and .IsPage (eq .Type "projects") }}
+{{- if and .IsPage (in (slice "projects" "progress") .Type) }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

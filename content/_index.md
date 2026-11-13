@@ -3,6 +3,8 @@ title: "Better evaluation. More reliable AI agents."
 description: "Ian Chen's research interests, public projects and technical writing."
 identity: "Ian Chen"
 eyebrow: "AI research / evidence-led engineering"
+progress_label: "Latest progress · No technical background needed"
+progress_link_label: "What we built, tested and learned"
 research_heading: "From measurement to understanding"
 research_label: "Research interests"
 interests:

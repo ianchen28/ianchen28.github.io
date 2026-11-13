@@ -3,6 +3,8 @@ title: "更可信的评估，更可靠的 AI Agent。"
 description: "Ian Chen 的研究兴趣、公开项目与技术写作。"
 identity: "Ian Chen"
 eyebrow: "AI 研究 / 以证据为基础的工程"
+progress_label: "最近进展 · 零基础也能读"
+progress_link_label: "看看我们做了什么、发现了什么"
 research_heading: "从测量走向理解"
 research_label: "研究兴趣"
 interests:

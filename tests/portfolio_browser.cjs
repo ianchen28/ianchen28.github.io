@@ -1,5 +1,5 @@
 // Existing Playwright installation: PLAYWRIGHT_MODULE=/absolute/path/to/playwright
-// Usage: node tests/portfolio_browser.cjs URL ARTIFACT_DIRECTORY [--baseline]
+// Usage: node tests/portfolio_browser.cjs URL ARTIFACT_DIRECTORY [--baseline|--progress]
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -25,13 +25,16 @@ function contrast(foreground, background) {
   };
   try {
     const widths = mode === '--baseline' ? [390, 1440] : [320, 390, 768, 1050, 1440];
+    const surfaces = mode === '--progress'
+      ? ['/', '/projects/agent-improvement-lab/', '/progress/']
+      : ['/', '/projects/agent-improvement-lab/', '/progress/', '/projects/', '/about/', '/posts/', '/posts/tech/llm-agents/'];
     for (const width of widths) for (const theme of ['light', 'dark']) {
       const context = await browser.newContext({ viewport: { width, height: 900 }, colorScheme: theme });
       await context.addInitScript(t => localStorage.setItem('pref-theme', t), theme);
       const page = await context.newPage();
       page.on('pageerror', error => errors.push(error.message));
       page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
-      for (const prefix of ['', '/zh']) for (const suffix of ['/', '/projects/agent-improvement-lab/', '/projects/', '/about/', '/posts/', '/posts/tech/llm-agents/']) {
+      for (const prefix of ['', '/zh']) for (const suffix of surfaces) {
         const route = prefix + suffix;
         const response = await page.goto(root + route, { waitUntil: 'networkidle' });
         const label = `${route} ${width} ${theme}`;
@@ -95,6 +98,44 @@ function contrast(foreground, background) {
           await page.locator('.harness-architecture summary').focus(); await page.keyboard.press('Enter');
           assert(await page.locator('.harness-architecture').evaluate(e => e.open));
           await page.keyboard.press('Enter');
+          assert.equal(await page.locator('.portfolio-actions a[href="' + prefix + '/progress/"]').count(), 1);
+        } else if (suffix === '/progress/') {
+          const progress = await page.evaluate(() => ({
+            highlightCount: document.querySelectorAll('.progress-highlight').length,
+            paragraphSize: parseFloat(getComputedStyle(document.querySelector('.research-progress .post-content p')).fontSize),
+            anchors: [...document.querySelectorAll('.progress-reading-nav a')].map(a => ({
+              target: a.hash.slice(1),
+              exists: Boolean(document.getElementById(a.hash.slice(1))),
+            })),
+            ids: [...document.querySelectorAll('[id]')].map(e => e.id),
+            sourceNote: document.querySelector('.progress-source-note').innerText,
+          }));
+          check(label + ' progress content', () => {
+            assert.equal(progress.highlightCount, 3);
+            assert(progress.paragraphSize >= 18);
+            assert(progress.anchors.length >= 7 && progress.anchors.every(a => a.exists));
+            assert.equal(new Set(progress.ids).size, progress.ids.length);
+            assert(data.text.includes('2026-11-11'));
+            assert(data.text.includes(prefix ? '十八条回复全部打包发出四个订单查询' : 'Every reply contained four order lookups'));
+            assert(data.text.includes(prefix ? '暂停这个单工具操作卡候选' : 'pause this single-tool instruction-card candidate'));
+            assert(data.text.includes(prefix ? '38 条单步诊断回复' : 'Thirty-eight single-response probes'));
+            assert(!/\/mnt\/|\/home\/cheni|OneDrive|gen-\d|#W\d|原生成功率/.test(data.text));
+            const schema = data.schema.find(s => s['@type'] === 'WebPage');
+            assert(schema);
+            assert.equal(schema.inLanguage, prefix ? 'zh' : 'en');
+            assert(!data.schema.some(s => s['@type'] === 'BlogPosting'));
+          });
+          const disclosure = page.locator('.progress-details');
+          assert.equal(await disclosure.count(), 1);
+          await disclosure.locator('summary').focus();
+          assert.notEqual(await disclosure.locator('summary').evaluate(e => getComputedStyle(e).outlineStyle), 'none');
+          await page.keyboard.press('Enter');
+          assert(await disclosure.evaluate(e => e.open));
+          assert((await disclosure.innerText()).includes('18'));
+          await page.keyboard.press('Enter');
+          assert(!(await disclosure.evaluate(e => e.open)));
+          await page.locator('.progress-reading-nav a[href="#conclusions"]').click();
+          assert.equal(new URL(page.url()).hash, '#conclusions');
         } else if (suffix === '/') {
           if (!prefix) check(label + ' English writing descriptions', () => {
             assert.equal(data.cardText.length, 2);
@@ -103,6 +144,8 @@ function contrast(foreground, background) {
           const projectLink = page.locator('.portfolio-featured .portfolio-actions a').first();
           await projectLink.focus();
           assert.notEqual(await projectLink.evaluate(e => getComputedStyle(e).outlineStyle), 'none');
+          const progressLink = page.locator('.portfolio-progress-callout a').first();
+          assert.equal(new URL(await progressLink.getAttribute('href'), root).pathname, prefix + '/progress/');
         } else if (suffix === '/projects/') {
           check(label + ' project cards', () => assert(data.text.includes(prefix ? '进行中：' : 'In progress:')));
           check(label + ' concise project list', () => assert(!data.text.includes(prefix ? '开发评估器' : 'Development Evaluator')));
@@ -111,7 +154,7 @@ function contrast(foreground, background) {
         assert.equal(await page.locator('body').evaluate(e => e.classList.contains('dark')), !data.bodyDark);
         await page.locator('#theme-toggle').click();
         if ([390, 1440].includes(width) && !suffix.startsWith('/posts/')) {
-          const surface = suffix === '/' ? 'home' : suffix.includes('agent-improvement-lab') ? 'project' : suffix.includes('projects') ? 'projects' : 'about';
+          const surface = suffix === '/' ? 'home' : suffix === '/progress/' ? 'progress' : suffix.includes('agent-improvement-lab') ? 'project' : suffix.includes('projects') ? 'projects' : 'about';
           await page.screenshot({ path: path.join(output, `${prefix ? 'zh' : 'en'}-${surface}-${width}-${theme}.png`), fullPage: true });
         }
         results.push({ route, width, theme, status: response.status() });
@@ -125,6 +168,10 @@ function contrast(foreground, background) {
       await page.waitForFunction(() => document.querySelectorAll('#searchResults li').length > 0);
       assert((await page.locator('#searchResults a').evaluateAll(a => a.map(e => new URL(e.href).pathname)))
         .includes(prefix + '/projects/agent-improvement-lab/'));
+      await page.locator('#searchInput').fill(prefix ? '操作卡' : 'instruction card');
+      await page.locator('#searchInput').press('ArrowRight');
+      await page.waitForFunction(target => [...document.querySelectorAll('#searchResults a')]
+        .some(a => new URL(a.href).pathname === target), prefix + '/progress/');
       await page.locator('#searchInput').fill('Transformer'); await page.locator('#searchInput').press('ArrowRight');
       assert((await page.locator('#searchResults').innerText()).includes('Transformer'));
     }

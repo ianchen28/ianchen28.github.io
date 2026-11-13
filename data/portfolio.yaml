@@ -1,4 +1,5 @@
 featured_project: projects/agent-improvement-lab
+progress_page: progress
 selected_posts:
   - posts/tech/transformer
   - posts/tech/LLM-agents

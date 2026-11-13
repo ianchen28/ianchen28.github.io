@@ -6,6 +6,16 @@
     <h1>{{ .Title }}</h1>
     <div class="portfolio-lead">{{ .Content }}</div>
   </header>
+  {{ with site.GetPage site.Data.portfolio.progress_page }}
+  <aside class="portfolio-progress-callout" aria-labelledby="progress-link-title">
+    <p class="portfolio-eyebrow">{{ $.Params.progress_label }}</p>
+    <h2 id="progress-link-title"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+    <p>{{ .Description }}</p>
+    <div class="portfolio-actions">
+      <a class="portfolio-primary-link" href="{{ .RelPermalink }}">{{ $.Params.progress_link_label }} &rarr;</a>
+    </div>
+  </aside>
+  {{ end }}
   <section id="projects" aria-labelledby="projects-title">
     <h2 id="projects-title">{{ .Params.projects_heading }}</h2>
     {{ $project := site.GetPage site.Data.portfolio.featured_project }}

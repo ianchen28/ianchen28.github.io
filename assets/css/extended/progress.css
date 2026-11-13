@@ -1,0 +1,199 @@
+body:has(.research-progress) .main {
+    max-width: 1000px;
+}
+
+.research-progress,
+.portfolio-progress-callout {
+    --portfolio-accent: #245d79;
+}
+
+.dark .research-progress,
+.dark .portfolio-progress-callout {
+    --portfolio-accent: #9acbea;
+}
+
+.portfolio-progress-callout {
+    border: 1px solid var(--border);
+    border-inline-start: 4px solid var(--portfolio-accent);
+    border-radius: var(--radius);
+    background: var(--entry);
+    padding: 24px;
+    margin: 12px 0 42px;
+}
+
+.portfolio-progress-callout h2 {
+    font-size: 24px;
+    margin: 8px 0 12px;
+}
+
+.portfolio-progress-callout p {
+    line-height: 1.8;
+}
+
+.portfolio-progress-callout .portfolio-actions {
+    margin-top: 16px;
+}
+
+.progress-dates {
+    color: var(--secondary);
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 0 0 16px;
+}
+
+.progress-snapshot h2,
+.progress-reading-nav h2,
+.progress-source-note h2 {
+    font-size: 23px;
+    line-height: 1.5;
+    margin: 0 0 16px;
+}
+
+.progress-highlights {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.progress-highlight {
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--portfolio-accent);
+    border-radius: var(--radius);
+    background: var(--entry);
+}
+
+.progress-highlight h3 {
+    font-size: 19px;
+    margin: 0 0 10px;
+}
+
+.progress-highlight p {
+    font-size: 16px;
+    line-height: 1.85;
+}
+
+.progress-reading-nav {
+    background: var(--code-bg);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin: 32px 0 44px;
+}
+
+.progress-reading-nav ol {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 32px;
+    padding-inline-start: 24px;
+    font-size: 16px;
+}
+
+.progress-reading-nav a {
+    display: inline-block;
+    padding: 8px 0;
+    line-height: 1.6;
+}
+
+.research-progress .post-content {
+    max-width: 780px;
+    margin-inline: auto;
+    font-size: 18px;
+    line-height: 1.9;
+}
+
+.research-progress .post-content > h2 {
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+    margin-top: 44px;
+    font-size: clamp(24px, 3vw, 29px);
+    line-height: 1.5;
+}
+
+.research-progress .post-content h3 {
+    margin-top: 32px;
+    font-size: 22px;
+    line-height: 1.55;
+}
+
+.research-progress .post-content li {
+    margin-block: 10px;
+}
+
+.research-progress .post-content blockquote {
+    background: var(--code-bg);
+    border-inline-start-color: var(--portfolio-accent);
+    padding: 16px 20px;
+}
+
+.research-progress .post-content blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+.research-progress .post-content table {
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.research-progress .post-content h2,
+.research-progress .post-content h3 {
+    scroll-margin-top: 24px;
+}
+
+.progress-details {
+    padding: 16px 20px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-block: 24px;
+}
+
+.progress-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    line-height: 1.8;
+}
+
+.progress-details[open] summary {
+    margin-bottom: 16px;
+}
+
+.progress-source-note {
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+    padding-top: 24px;
+    line-height: 1.8;
+    font-size: 16px;
+}
+
+.progress-source-note p {
+    margin-bottom: 16px;
+}
+
+.progress-reading-nav a,
+.progress-source-note a {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+.research-progress a:focus-visible,
+.progress-details summary:focus-visible {
+    outline: 3px solid var(--portfolio-accent);
+    outline-offset: 4px;
+}
+
+@media (max-width: 700px) {
+    .progress-highlights,
+    .progress-reading-nav ol {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-progress-callout,
+    .progress-highlight,
+    .progress-reading-nav {
+        padding: 18px;
+    }
+
+    .research-progress .portfolio-hero h1 {
+        font-size: 32px;
+        line-height: 1.35;
+    }
+}
